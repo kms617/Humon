@@ -11,6 +11,8 @@ gem "flutie"
 gem "high_voltage"
 gem "i18n-tasks"
 gem "jquery-rails"
+gem 'jbuilder'
+gem 'oj'
 gem "neat", "~> 1.5.1"
 gem "newrelic_rpm"
 gem "normalize-rails", "~> 3.0.0"
@@ -28,7 +30,6 @@ gem "unicorn"
 group :development do
   gem "spring"
   gem "spring-commands-rspec"
-  gem "web-console"
 end
 
 group :development, :test do
@@ -53,4 +54,5 @@ end
 
 group :staging, :production do
   gem "rails_stdout_logging"
+  gem 'rails_12factor'
 end
