@@ -10,12 +10,12 @@ gem "email_validator"
 gem "flutie"
 gem "high_voltage"
 gem "i18n-tasks"
-gem "jquery-rails"
 gem 'jbuilder'
-gem 'oj'
+gem "jquery-rails"
 gem "neat", "~> 1.5.1"
 gem "newrelic_rpm"
 gem "normalize-rails", "~> 3.0.0"
+gem 'oj'
 gem "pg"
 gem "rack-timeout"
 gem "rails", "4.2.0"
