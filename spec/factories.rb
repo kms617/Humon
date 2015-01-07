@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :event do
     lat
     lon
