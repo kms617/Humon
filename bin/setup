@@ -18,7 +18,7 @@ fi
 # Set up database and add any development seed data
 bundle exec rake db:setup dev:prime
 
-# Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
+# Add binstubs to PATH via export PATH='.git/safe/../../bin:$PATH' in ~/.zshenv
 mkdir -p .git/safe
 
 # Pick a port for Foreman
@@ -32,25 +32,25 @@ if ! command -v foreman > /dev/null; then
 fi
 
 # Only if this isn't CI
-# if [ -z "$CI" ]; then
+# if [ -z '$CI' ]; then
 # fi
 
 # Set up the staging and production apps.
 if heroku join --app humon-staging &> /dev/null; then
   git remote add staging git@heroku.com:humon-staging.git || true
-  printf 'You are a collaborator on the "humon-staging" Heroku app
+  printf 'You are a collaborator on the 'humon-staging' Heroku app
 '
 else
-  printf 'Ask for access to the "humon-staging" Heroku app
+  printf 'Ask for access to the 'humon-staging' Heroku app
 '
 fi
 
 if heroku join --app humon-production &> /dev/null; then
   git remote add production git@heroku.com:humon-production.git || true
-  printf 'You are a collaborator on the "humon-production" Heroku app
+  printf 'You are a collaborator on the 'humon-production' Heroku app
 '
 else
-  printf 'Ask for access to the "humon-production" Heroku app
+  printf 'Ask for access to the 'humon-production' Heroku app
 '
 fi
 
