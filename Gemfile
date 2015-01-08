@@ -55,6 +55,5 @@ end
 group :staging, :production do
   gem 'airbrake'
   gem 'newrelic_rpm'
-  gem 'rails_stdout_logging'
   gem 'rails_12factor'
 end
