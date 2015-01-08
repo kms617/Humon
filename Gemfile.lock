@@ -283,7 +283,6 @@ DEPENDENCIES
   rack-timeout
   rails (= 4.2.0)
   rails_12factor
-  rails_stdout_logging
   recipient_interceptor
   refills
   rspec-rails (~> 3.0.0)
