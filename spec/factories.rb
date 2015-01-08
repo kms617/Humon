@@ -1,7 +1,7 @@
 require 'faker'
 FactoryGirl.define do
-  sequence :token do
-    SecureRandom.hex(3)
+  factory :user, aliases: [:owner] do
+    sequence(:device_token) { SecureRandom.hex(3) }
   end
 
   factory :event do
@@ -9,10 +9,6 @@ FactoryGirl.define do
     lon { Faker::Address.longitude.to_f.round(5) }
     sequence(:name) { |n| "Name #{n}" }
     sequence(:started_at) { |n| n.hours.from_now }
-    owner factory: :user
-  end
-
-  factory :user do
-    device_token { generate(:token) }
+    owner
   end
 end
