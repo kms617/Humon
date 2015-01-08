@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'GET/v1/events/:id' do
   it 'returns an event by :id' do
-    event = create(:event)
+    event = FactoryGirl.create(:event)
 
-    get '/v1/events/#{event.id}'
+    get "/v1/events/#{event.id}"
 
     expect(response_json).to eq(
       {
