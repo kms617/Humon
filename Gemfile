@@ -2,18 +2,15 @@ source 'https://rubygems.org'
 
 ruby '2.2.0'
 
-gem 'airbrake'
 gem 'bourbon', '~> 3.2.1'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'delayed_job_active_record'
 gem 'email_validator'
 gem 'flutie'
 gem 'high_voltage'
-gem 'i18n-tasks'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'neat', '~> 1.5.1'
-gem 'newrelic_rpm'
 gem 'normalize-rails', '~> 3.0.0'
 gem 'oj'
 gem 'pg'
@@ -47,6 +44,7 @@ end
 group :test do
   gem 'capybara-webkit', '>= 1.2.0'
   gem 'database_cleaner'
+  gem 'faker'
   gem 'formulaic'
   gem 'launchy'
   gem 'shoulda-matchers', require: false
@@ -55,6 +53,8 @@ group :test do
 end
 
 group :staging, :production do
+  gem 'airbrake'
+  gem 'newrelic_rpm'
   gem 'rails_stdout_logging'
   gem 'rails_12factor'
 end
