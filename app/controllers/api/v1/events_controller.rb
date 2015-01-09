@@ -5,9 +5,13 @@ class Api::V1::EventsController < ApiController
 
   def create
     @event = Event.new(event_params)
-
     if @event.save
       render
+    else
+      render json: {
+        message: 'Validation Failed',
+        errors: @event.errors.full_messages
+      }, status: 422
     end
   end
 
