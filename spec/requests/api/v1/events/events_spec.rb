@@ -55,4 +55,29 @@ describe 'POST/v1/events' do
     expect(event.started_at.to_i).to eq date.to_i
     expect(event.owner).to eq owner
   end
+
+  it 'returns an error message when invalid', focus: true do
+    post '/v1/events',
+      { address: nil,
+        ended_at: nil,
+        lat: nil,
+        lon: nil,
+        name: nil,
+        started_at: nil,
+        owner: {
+          device_token: event.owner.device_token
+          }
+          }.to_json, { 'Content-Type' => 'application/json' }
+
+    expect(response_json). to eq({
+      'message' => 'Validation Failed',
+      'errors' => [
+        "Lat can't be blank",
+        "Lon can't be blank",
+        "Name can't be blank",
+        "Started at can't be blank"
+      ]
+    })
+    expect(respons.code.to_i).to eq 422
+  end
 end
