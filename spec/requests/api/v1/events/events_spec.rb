@@ -56,7 +56,7 @@ describe 'POST/v1/events' do
     expect(event.owner).to eq owner
   end
 
-  it 'returns an error message when invalid', focus: true do
+  it 'returns an error message when invalid' do
     post '/v1/events',
       { address: nil,
         ended_at: nil,
