@@ -54,20 +54,21 @@ describe 'POST/v1/events' do
   end
 
   it 'returns an error message when invalid' do
-    post '/v1/events',
-      { address: nil,
+      empty_params = {
+        address: nil,
         ended_at: nil,
         lat: nil,
         lon: nil,
         name: nil,
         started_at: nil,
         owner: {
-          device_token: nil
-          }
-          }.to_json, { 'Content-Type' => 'application/json' }
+        device_token: nil
+        }
+      }
 
-    event = Event.last
-    expect(response_json). to eq({
+      post '/v1/events', { event: empty_params }.to_json, 'Content-Type' => 'application/json'
+
+      expect(response_json). to eq({
       'message' => 'Validation Failed',
       'errors' => [
         "Lat can't be blank",
