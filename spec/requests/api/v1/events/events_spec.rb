@@ -65,10 +65,11 @@ describe 'POST/v1/events' do
         name: nil,
         started_at: nil,
         owner: {
-          device_token: event.owner.device_token
+          device_token: nil
           }
           }.to_json, { 'Content-Type' => 'application/json' }
 
+    event = Event.last
     expect(response_json). to eq({
       'message' => 'Validation Failed',
       'errors' => [
@@ -78,6 +79,6 @@ describe 'POST/v1/events' do
         "Started at can't be blank"
       ]
     })
-    expect(respons.code.to_i).to eq 422
+    expect(response.code.to_i).to eq 422
   end
 end
