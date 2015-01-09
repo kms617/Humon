@@ -4,5 +4,31 @@ class Api::V1::EventsController < ApiController
   end
 
   def create
+    @event = Event.new(event_params)
+
+    if @event.save
+      render
+    end
+  end
+
+  private
+
+  def event_params
+    params.require(:event).permit(
+      :address,
+      :ended_at,
+      :lat,
+      :lon,
+      :name,
+      :started_at).
+      merge(owner: user)
+  end
+
+  def user
+    User.find_or_create_by(device_token: device_token)
+  end
+
+  def device_token
+    params[:owner].try(:[], :device_token)
   end
 end
