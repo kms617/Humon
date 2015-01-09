@@ -4,7 +4,7 @@ class Api::V1::EventsController < ApiController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(event)
     if @event.save
       render
     else
@@ -24,8 +24,8 @@ class Api::V1::EventsController < ApiController
       :lat,
       :lon,
       :name,
-      :started_at).
-      merge(owner: user)
+      :started_at,
+      owner: [:device_token])
   end
 
   def user
@@ -33,6 +33,10 @@ class Api::V1::EventsController < ApiController
   end
 
   def device_token
-    params[:owner].try(:[], :device_token)
+    event_params[:owner].try(:[], :device_token)
+  end
+
+  def event
+    event_params.merge(owner: user)
   end
 end
