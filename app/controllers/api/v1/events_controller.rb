@@ -15,6 +15,14 @@ class Api::V1::EventsController < ApiController
     end
   end
 
+  def update
+    @event = Event.find(params[:id])
+    
+    if @event.update(event)
+      render
+    end
+  end
+
   private
 
   def event_params
