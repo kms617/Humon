@@ -1,4 +1,5 @@
 require 'faker'
+
 FactoryGirl.define do
   factory :event do
     lat { Faker::Address.latitude.to_f.round(5) }
@@ -8,27 +9,21 @@ FactoryGirl.define do
     owner
 
     trait :intrepid do
-      name "Intrepid Labs"
+      name 'Intrepid Labs'
       lat 42.36708
       lon (-71.08035)
     end
 
     trait :museum do
-      name "Museum of Science"
+      name 'Museum of Science'
       lat 42.36673
       lon (-71.06761)
     end
-    
+
     trait :cambridge do
-      name "Central Square"
+      name 'Central Square'
       lat 42.36562
       lon (-71.10385)
-    end
-
-    trait :new_york do
-      name "Central Park"
-      lat 40.78269
-      lon (-73.96557)
     end
 
     trait :chicago do
