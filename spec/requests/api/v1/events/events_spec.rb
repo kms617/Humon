@@ -125,8 +125,8 @@ describe 'PATCH /v1/events/:id' do
       'message' => 'Validation Failed',
       'errors' => [
         "Name can't be blank"
-        ]
-      })
+      ]
+    })
     expect(response).to have_http_status :unprocessable_entity
   end
 end
