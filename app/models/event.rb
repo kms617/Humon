@@ -5,4 +5,6 @@ class Event < ActiveRecord::Base
   validates_presence_of :lon
   validates_presence_of :name
   validates_presence_of :started_at
+
+  reverse_geocoded_by :lat, :lon
 end
