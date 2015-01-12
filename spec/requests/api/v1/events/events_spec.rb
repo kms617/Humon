@@ -37,7 +37,8 @@ describe 'POST/v1/events' do
       lon: event.lon,
       name: event.name,
       started_at: event.started_at,
-      owner: { device_token: event.owner.device_token
+      owner: {
+        device_token: event.owner.device_token
       }
     }
     post '/v1/events',
