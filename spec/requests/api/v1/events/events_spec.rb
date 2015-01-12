@@ -4,7 +4,7 @@ describe 'GET/v1/events/:id' do
   it 'returns an event by :id' do
     event = FactoryGirl.create(:event)
 
-    get "/v1/events/#{event.id}"
+    get v1_event_path(id: event.id)
 
     expect(response_json).to eq(
       'address' => event.address,
@@ -39,7 +39,7 @@ describe 'POST/v1/events' do
         device_token: event.owner.device_token
       }
     }
-    post '/v1/events',
+    post v1_events_path,
           { event: event_params }.to_json,
           'Content-Type' => 'application/json'
 
@@ -67,7 +67,7 @@ describe 'POST/v1/events' do
       }
     }
 
-    post '/v1/events',
+    post v1_events_path,
           { event: empty_params }.to_json,
           'Content-Type' => 'application/json'
 
@@ -101,7 +101,7 @@ describe 'PATCH /v1/events/:id' do
 
     event.reload
     expect(event.name).to eq new_name
-    expect(response_json). to eq('id' => event.id)
+    expect(response_json).to eq('id' => event.id)
     expect(response).to have_http_status :ok
   end
 
@@ -114,7 +114,7 @@ describe 'PATCH /v1/events/:id' do
       },
     }
 
-    patch "/v1/events/#{event.id}",
+    patch v1_event_path(id: event.id),
           { event: bad_event_params }.to_json,
           'Content-Type' => 'application/json'
 

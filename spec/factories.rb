@@ -27,6 +27,7 @@ FactoryGirl.define do
     end
 
     trait :chicago do
+      name 'Jackson Street Bridge'
       lat 41.88779
       lon (-87.623)
     end
