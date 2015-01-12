@@ -99,4 +99,26 @@ describe 'PATCH /v1/events/:id' do
     expect(event.name).to eq new_name
     expect(response_json). to eq({ 'id' => event.id })
   end
+
+  it 'returns an error message when invalid' do
+    event = create(:event)
+    bad_event_params = {
+      name: nil,
+      owner: {
+        device_token: event.owner.device_token
+      },
+    }
+
+    patch "/v1/events/#{event.id}", { event: bad_event_params }.to_json, 'Content-Type' => 'application/json'
+
+    event.reload
+    expect(event.name).to_not be nil
+    expect(response_json).to eq({
+      'message' => 'Validation Failed',
+      'errors' => [
+        "Name can't be blank"
+        ]
+      })
+    expect(response.code.to_i).to eq 422
+  end
 end
