@@ -6,6 +6,35 @@ FactoryGirl.define do
     sequence(:name) { |n| "Name #{n}" }
     sequence(:started_at) { |n| n.hours.from_now }
     owner
+
+    trait :intrepid do
+      name "Intrepid Labs"
+      lat 42.36708
+      lon (-71.08035)
+    end
+
+    trait :museum do
+      name "Museum of Science"
+      lat 42.36673
+      lon (-71.06761)
+    end
+    
+    trait :cambridge do
+      name "Central Square"
+      lat 42.36562
+      lon (-71.10385)
+    end
+
+    trait :new_york do
+      name "Central Park"
+      lat 40.78269
+      lon (-73.96557)
+    end
+
+    trait :chicago do
+      lat 41.88779
+      lon (-87.623)
+    end
   end
 
   factory :user, aliases: [:owner] do
