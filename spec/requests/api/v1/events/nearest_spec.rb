@@ -45,4 +45,18 @@ describe 'GET /v1/events/nearests?lat=&lon=&radius=' do
       }
     ])
   end
+
+  it 'returns an error message when no event is found' do
+    chicago = build(:event, :chicago)
+    lat = chicago.lat
+    lon = chicago.lon
+    radius = 5
+
+    get "/v1/events/nearests?lat=#{lat}&lon=#{lon}&radius=#{radius}"
+
+    expect(response_json). to eq({
+      'message' => 'No Events Found',
+      })
+      expect(response).to have_http_status :ok
+  end
 end
