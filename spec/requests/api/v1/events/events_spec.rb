@@ -119,7 +119,7 @@ describe 'PATCH /v1/events/:id' do
           'Content-Type' => 'application/json'
 
     event.reload
-    expect(event.name).to_not be nil
+    expect(event.name).to be
     expect(response_json).to eq(
       'message' => 'Validation Failed',
       'errors' => [
