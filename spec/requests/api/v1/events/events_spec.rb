@@ -37,7 +37,7 @@ describe 'POST/v1/events' do
       lon: event.lon,
       name: event.name,
       started_at: event.started_at,
-      owner: {device_token: event.owner.device_token
+      owner: { device_token: event.owner.device_token
       }
     }
     post '/v1/events', { event: event_params }.to_json, 'Content-Type' => 'application/json'
@@ -62,7 +62,7 @@ describe 'POST/v1/events' do
         name: nil,
         started_at: nil,
         owner: {
-        device_token: nil
+          device_token: nil
         }
       }
 
@@ -78,5 +78,28 @@ describe 'POST/v1/events' do
       ]
     })
     expect(response.code.to_i).to eq 422
+  end
+end
+
+describe 'PATCH /v1/events/:id' do
+  it 'updates the event attributes' do
+    event = create(:event, name: 'Old name')
+    new_name = 'New name'
+
+    patch "/v1/events/#{event.id}", {
+      address: event.address,
+    ended_at: event.ended_at,
+    lat: event.lat,
+    lon: event.lon,
+    name: new_name,
+    owner: {
+        device_token: event.owner.device_token
+      },
+    started_at: event.started_at
+  }.to_json, { 'Content-Type' => 'applications/json'}
+
+    event.reload
+    expect(event.name).to eq new_name
+    expect(response_json). to eq({ 'id' => event.id })
   end
 end
