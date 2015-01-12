@@ -4,24 +4,22 @@ describe 'GET/v1/events/:id' do
   it 'returns an event by :id' do
     event = FactoryGirl.create(:event)
 
-    get "/v1/events/#{event.id}"
+    get v1_event_path(id: event.id)
 
     expect(response_json).to eq(
-      {
-        'address' => event.address,
-        'created_at' => event.created_at.as_json,
-        'ended_at' => event.ended_at.as_json,
-        'id' => event.id,
-        'lat' => event.lat,
-        'lon' => event.lon,
-        'name' => event.name,
-        'started_at' => event.started_at.as_json,
-        'updated_at' => event.updated_at.as_json,
-        'owner' => {
-          'created_at' => event.owner.created_at.as_json,
-          'device_token' => event.owner.device_token,
-          'updated_at' => event.owner.updated_at.as_json
-        }
+      'address' => event.address,
+      'created_at' => event.created_at.as_json,
+      'ended_at' => event.ended_at.as_json,
+      'id' => event.id,
+      'lat' => event.lat,
+      'lon' => event.lon,
+      'name' => event.name,
+      'started_at' => event.started_at.as_json,
+      'updated_at' => event.updated_at.as_json,
+      'owner' => {
+        'created_at' => event.owner.created_at.as_json,
+        'device_token' => event.owner.device_token,
+        'updated_at' => event.owner.updated_at.as_json
       }
     )
   end
@@ -41,7 +39,7 @@ describe 'POST/v1/events' do
         device_token: event.owner.device_token
       }
     }
-    post '/v1/events',
+    post v1_events_path,
           { event: event_params }.to_json,
           'Content-Type' => 'application/json'
 
@@ -57,23 +55,23 @@ describe 'POST/v1/events' do
   end
 
   it 'returns an error message when invalid' do
-      empty_params = {
-        address: nil,
-        ended_at: nil,
-        lat: nil,
-        lon: nil,
-        name: nil,
-        started_at: nil,
-        owner: {
-          device_token: nil
-        }
+    empty_params = {
+      address: nil,
+      ended_at: nil,
+      lat: nil,
+      lon: nil,
+      name: nil,
+      started_at: nil,
+      owner: {
+        device_token: nil
       }
+    }
 
-      post '/v1/events',
-            { event: empty_params }.to_json,
-            'Content-Type' => 'application/json'
+    post v1_events_path,
+          { event: empty_params }.to_json,
+          'Content-Type' => 'application/json'
 
-      expect(response_json). to eq({
+    expect(response_json). to eq(
       'message' => 'Validation Failed',
       'errors' => [
         "Lat can't be blank",
@@ -81,7 +79,7 @@ describe 'POST/v1/events' do
         "Name can't be blank",
         "Started at can't be blank"
       ]
-    })
+    )
     expect(response).to have_http_status :unprocessable_entity
   end
 end
@@ -90,20 +88,20 @@ describe 'PATCH /v1/events/:id' do
   it 'updates the event attributes' do
     event = create(:event, name: 'Old name')
     new_name = 'New name'
-    event_params= {
+    event_params = {
       name: new_name,
       owner: {
         device_token: event.owner.device_token
       },
     }
 
-    patch "/v1/events/#{event.id}",
+    patch v1_event_path(id: event.id),
           { event: event_params }.to_json,
           'Content-Type' => 'application/json'
 
     event.reload
     expect(event.name).to eq new_name
-    expect(response_json). to eq({ 'id' => event.id })
+    expect(response_json).to eq('id' => event.id)
     expect(response).to have_http_status :ok
   end
 
@@ -116,18 +114,18 @@ describe 'PATCH /v1/events/:id' do
       },
     }
 
-    patch "/v1/events/#{event.id}",
+    patch v1_event_path(id: event.id),
           { event: bad_event_params }.to_json,
           'Content-Type' => 'application/json'
 
     event.reload
-    expect(event.name).to_not be nil
-    expect(response_json).to eq({
+    expect(event.name).to be
+    expect(response_json).to eq(
       'message' => 'Validation Failed',
       'errors' => [
         "Name can't be blank"
       ]
-    })
+    )
     expect(response).to have_http_status :unprocessable_entity
   end
 end
