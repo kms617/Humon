@@ -40,7 +40,9 @@ describe 'POST/v1/events' do
       owner: { device_token: event.owner.device_token
       }
     }
-    post '/v1/events', { event: event_params }.to_json, 'Content-Type' => 'application/json'
+    post '/v1/events',
+          { event: event_params }.to_json,
+          'Content-Type' => 'application/json'
 
     response_event = Event.last
     expect(response_json).to eq('id' => response_event.id)
@@ -66,8 +68,9 @@ describe 'POST/v1/events' do
         }
       }
 
-      post '/v1/events', { event: empty_params }.to_json, 'Content-Type' => 'application/json'
-
+      post '/v1/events',
+            { event: empty_params }.to_json,
+            'Content-Type' => 'application/json'
 
       expect(response_json). to eq({
       'message' => 'Validation Failed',
@@ -78,7 +81,7 @@ describe 'POST/v1/events' do
         "Started at can't be blank"
       ]
     })
-    expect(response.code.to_i).to eq 422
+    expect(response).to have_http_status :unprocessable_entity
   end
 end
 
@@ -90,14 +93,17 @@ describe 'PATCH /v1/events/:id' do
       name: new_name,
       owner: {
         device_token: event.owner.device_token
-        },
-      }
+      },
+    }
 
-    patch "/v1/events/#{event.id}", { event: event_params }.to_json, 'Content-Type' => 'application/json'
+    patch "/v1/events/#{event.id}",
+          { event: event_params }.to_json,
+          'Content-Type' => 'application/json'
 
     event.reload
     expect(event.name).to eq new_name
     expect(response_json). to eq({ 'id' => event.id })
+    expect(response).to have_http_status :ok
   end
 
   it 'returns an error message when invalid' do
@@ -109,7 +115,9 @@ describe 'PATCH /v1/events/:id' do
       },
     }
 
-    patch "/v1/events/#{event.id}", { event: bad_event_params }.to_json, 'Content-Type' => 'application/json'
+    patch "/v1/events/#{event.id}",
+          { event: bad_event_params }.to_json,
+          'Content-Type' => 'application/json'
 
     event.reload
     expect(event.name).to_not be nil
@@ -119,6 +127,6 @@ describe 'PATCH /v1/events/:id' do
         "Name can't be blank"
         ]
       })
-    expect(response.code.to_i).to eq 422
+    expect(response).to have_http_status :unprocessable_entity
   end
 end

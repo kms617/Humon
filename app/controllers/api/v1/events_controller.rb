@@ -6,12 +6,12 @@ class Api::V1::EventsController < ApiController
   def create
     @event = Event.new(event)
     if @event.save
-      render
+      render status: :ok
     else
       render json: {
         message: 'Validation Failed',
         errors: @event.errors.full_messages
-      }, status: 422
+      }, status: :unprocessable_entity
     end
   end
 
@@ -19,12 +19,13 @@ class Api::V1::EventsController < ApiController
     @event = Event.find(params[:id])
 
     if @event.update(event)
-      render
+      render status: :ok
+
     else
       render json: {
         message: 'Validation Failed',
         errors: @event.errors.full_messages
-      }, status: 422
+      }, status: :unprocessable_entity
     end
   end
 
