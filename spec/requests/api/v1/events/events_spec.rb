@@ -95,7 +95,7 @@ describe 'PATCH /v1/events/:id' do
       },
     }
 
-    patch "/v1/events/#{event.id}",
+    patch v1_event_path(id: event.id),
           { event: event_params }.to_json,
           'Content-Type' => 'application/json'
 
