@@ -2,6 +2,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :event do
+    sequence(:address) { |n| "Locations #{n}" }
     lat { Faker::Address.latitude.to_f.round(5) }
     lon { Faker::Address.longitude.to_f.round(5) }
     sequence(:name) { |n| "Name #{n}" }
