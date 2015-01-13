@@ -51,6 +51,7 @@ group :test do
   gem 'database_cleaner'
   gem 'faker'
   gem 'formulaic'
+  gem 'json-schema'
   gem 'launchy'
   gem 'shoulda-matchers', require: false
   gem 'timecop'
