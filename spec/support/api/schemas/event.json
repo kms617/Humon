@@ -4,7 +4,7 @@
   "properties" : {
     "created_at" : { "type" : "string", "format": "date-time" },
     "updated_at" : { "type" : "string", "format": "date-time" },
-    "address" : { "type" : ["null, string"] },
+    "address" : { "type" : "string" },
     "ended_at" : { "type" : ["null, string"] },
     "lat" : { "type" : "float" },
     "lon" : { "type" : "float" },
@@ -12,6 +12,7 @@
     "started_at": { "type" : "string", "format": "date-time" }
   },
   "required" : [
+    "address",
     "created_at",
     "updated_at",
     "lat",

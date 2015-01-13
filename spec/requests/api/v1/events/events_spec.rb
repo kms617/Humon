@@ -76,6 +76,7 @@ describe 'POST/v1/events' do
     expect(response_json). to eq(
       'message' => 'Validation Failed',
       'errors' => [
+        "Address can't be blank",
         "Lat can't be blank",
         "Lon can't be blank",
         "Name can't be blank",
