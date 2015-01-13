@@ -2,6 +2,7 @@
   "type": "object",
   "description": "Event",
   "properties" : {
+    "id" : { "type" : "integer" },
     "created_at" : { "type" : "string", "format": "date-time" },
     "updated_at" : { "type" : "string", "format": "date-time" },
     "address" : { "type" : "string" },
@@ -9,7 +10,8 @@
     "lat" : { "type" : "float" },
     "lon" : { "type" : "float" },
     "name" : { "type" : "string" },
-    "started_at": { "type" : "string", "format": "date-time" }
+    "started_at": { "type" : "string", "format": "date-time" },
+    "user_id" : { "type" : "string" }
   },
   "required" : [
     "address",

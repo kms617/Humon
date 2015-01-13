@@ -7,23 +7,6 @@ describe 'GET/v1/events/:id' do
     get v1_event_path(id: event.id)
 
     expect(response).to match_response_schema(:event)
-
-    # expect(response_json).to eq(
-    #   'address' => event.address,
-    #   'created_at' => event.created_at.as_json,
-    #   'ended_at' => event.ended_at.as_json,
-    #   'id' => event.id,
-    #   'lat' => event.lat,
-    #   'lon' => event.lon,
-    #   'name' => event.name,
-    #   'started_at' => event.started_at.as_json,
-    #   'updated_at' => event.updated_at.as_json,
-    #   'owner' => {
-    #     'created_at' => event.owner.created_at.as_json,
-    #     'device_token' => event.owner.device_token,
-    #     'updated_at' => event.owner.updated_at.as_json
-    #   }
-    # )
   end
 end
 
@@ -46,14 +29,15 @@ describe 'POST/v1/events' do
           'Content-Type' => 'application/json'
 
     response_event = Event.last
-    expect(response_json).to eq('id' => response_event.id)
-    expect(response_event.address).to eq event.address
-    expect(response_event.ended_at.to_i).to eq event.ended_at.to_i
-    expect(response_event.lat).to eq event.lat
-    expect(response_event.lon). to eq event.lon
-    expect(response_event.name).to eq event.name
-    expect(response_event.started_at.to_i).to eq event.started_at.to_i
-    expect(response_event.owner).to eq event.owner
+    expect(response).to match_response_schema(:event)
+    # expect(response_json).to eq('id' => response_event.id)
+    # expect(response_event.address).to eq event.address
+    # expect(response_event.ended_at.to_i).to eq event.ended_at.to_i
+    # expect(response_event.lat).to eq event.lat
+    # expect(response_event.lon). to eq event.lon
+    # expect(response_event.name).to eq event.name
+    # expect(response_event.started_at.to_i).to eq event.started_at.to_i
+    # expect(response_event.owner).to eq event.owner
   end
 
   it 'returns an error message when invalid' do
