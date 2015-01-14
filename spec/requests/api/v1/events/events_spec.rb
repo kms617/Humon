@@ -30,14 +30,6 @@ describe 'POST/v1/events' do
 
     response_event = Event.last
     expect(response).to match_response_schema(:event)
-    # expect(response_json).to eq('id' => response_event.id)
-    # expect(response_event.address).to eq event.address
-    # expect(response_event.ended_at.to_i).to eq event.ended_at.to_i
-    # expect(response_event.lat).to eq event.lat
-    # expect(response_event.lon). to eq event.lon
-    # expect(response_event.name).to eq event.name
-    # expect(response_event.started_at.to_i).to eq event.started_at.to_i
-    # expect(response_event.owner).to eq event.owner
   end
 
   it 'returns an error message when invalid' do
@@ -87,8 +79,7 @@ describe 'PATCH /v1/events/:id' do
           'Content-Type' => 'application/json'
 
     event.reload
-    expect(event.name).to eq new_name
-    expect(response_json).to eq('id' => event.id)
+    expect(response).to match_response_schema(:event)
     expect(response).to have_http_status :ok
   end
 
