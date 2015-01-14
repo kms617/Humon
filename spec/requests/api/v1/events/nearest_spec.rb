@@ -19,9 +19,6 @@ describe 'GET /v1/events/nearests?lat=&lon=&radius=' do
     radius = 5
 
     get v1_events_nearests_path(lat: lat, lon: lon, radius: radius)
-    expect(response_json). to eq(
-      'message' => 'No Events Found',
-    )
-    expect(response).to have_http_status :ok
+    expect(response).to have_http_status :no_content
   end
 end

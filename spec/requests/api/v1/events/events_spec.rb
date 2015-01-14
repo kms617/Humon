@@ -50,10 +50,10 @@ describe 'POST/v1/events' do
           'Content-Type' => 'application/json'
 
     expect(response_json). to eq(
-      "errors" =>
-      "Validation failed: Address can't be blank, "\
-      "Lat can't be blank, Lon can't be blank, "\
-      "Name can't be blank, Started at can't be blank"
+      'errors' =>
+        "Validation failed: Address can't be blank, "\
+        "Lat can't be blank, Lon can't be blank, "\
+        "Name can't be blank, Started at can't be blank"
     )
     expect(response).to have_http_status :bad_request
   end
@@ -74,13 +74,12 @@ describe 'PATCH /v1/events/:id' do
           { event: event_params }.to_json,
           'Content-Type' => 'application/json'
 
-    event.reload
     expect(response).to match_response_schema(:event)
     expect(response).to have_http_status :ok
   end
 
   it 'returns an error message when invalid' do
-    event = create(:event)
+    event = create(:event, name: 'Original Name')
     bad_event_params = {
       name: nil,
       owner: {
@@ -92,9 +91,10 @@ describe 'PATCH /v1/events/:id' do
           { event: bad_event_params }.to_json,
           'Content-Type' => 'application/json'
 
-    event.reload
-    expect(event.name).to be
-    expect(response_json).to eq( "errors"=>"Validation failed: Name can't be blank" )
+    expect(event.name).to eq ('Original Name')
+    expect(response_json).to eq(
+      'errors' => "Validation failed: Name can't be blank"
+    )
     expect(response).to have_http_status :bad_request
   end
 end
