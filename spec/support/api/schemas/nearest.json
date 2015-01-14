@@ -1,0 +1,47 @@
+{
+  "type": "array",
+  "items" : [
+    {"properties" : {
+      "id" : { "type" : "integer" },
+      "created_at" : { "type" : "string", "format": "date-time" },
+      "updated_at" : { "type" : "string", "format": "date-time" },
+      "address" : { "type" : "string" },
+      "ended_at" : { "type" : ["null, string"] },
+      "lat" : { "type" : "float" },
+      "lon" : { "type" : "float" },
+      "name" : { "type" : "string" },
+      "started_at": { "type" : "string", "format": "date-time" },
+      "user_id" : { "type" : "string" }
+      },
+      "required" : [
+        "address",
+        "created_at",
+        "updated_at",
+        "lat",
+        "lon",
+        ["owner"]
+      ]
+    },
+    {"properties" : {
+      "id" : { "type" : "integer" },
+      "created_at" : { "type" : "string", "format": "date-time" },
+      "updated_at" : { "type" : "string", "format": "date-time" },
+      "address" : { "type" : "string" },
+      "ended_at" : { "type" : ["null, string"] },
+      "lat" : { "type" : "float" },
+      "lon" : { "type" : "float" },
+      "name" : { "type" : "string" },
+      "started_at": { "type" : "string", "format": "date-time" },
+      "user_id" : { "type" : "string" }
+      },
+      "required" : [
+        "address",
+        "created_at",
+        "updated_at",
+        "lat",
+        "lon",
+        ["owner"]
+      ]
+    }
+  ]
+}
