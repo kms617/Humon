@@ -5,16 +5,13 @@ class Api::V1::Events::NearestsController < ApiController
     if @events.present?
       render
     else
-      render json: { message: 'No Events Found' },
-      status: :ok
+      render status: :no_content
     end
   end
-
 
   private
 
   def coordinates
     [params[:lat], params[:lon]]
   end
-
 end
