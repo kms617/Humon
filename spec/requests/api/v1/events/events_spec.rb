@@ -51,7 +51,9 @@ describe 'POST/v1/events' do
 
     expect(response_json). to eq(
       "errors" =>
-      "Validation failed: Address can't be blank, Lat can't be blank, Lon can't be blank, Name can't be blank, Started at can't be blank"
+      "Validation failed: Address can't be blank, "\
+      "Lat can't be blank, Lon can't be blank, "\
+      "Name can't be blank, Started at can't be blank"
     )
     expect(response).to have_http_status :bad_request
   end
