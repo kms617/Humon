@@ -50,16 +50,10 @@ describe 'POST/v1/events' do
           'Content-Type' => 'application/json'
 
     expect(response_json). to eq(
-      'message' => 'Validation Failed',
-      'errors' => [
-        "Address can't be blank",
-        "Lat can't be blank",
-        "Lon can't be blank",
-        "Name can't be blank",
-        "Started at can't be blank"
-      ]
+      "errors" =>
+      "Validation failed: Address can't be blank, Lat can't be blank, Lon can't be blank, Name can't be blank, Started at can't be blank"
     )
-    expect(response).to have_http_status :unprocessable_entity
+    expect(response).to have_http_status :bad_request
   end
 end
 
@@ -98,12 +92,7 @@ describe 'PATCH /v1/events/:id' do
 
     event.reload
     expect(event.name).to be
-    expect(response_json).to eq(
-      'message' => 'Validation Failed',
-      'errors' => [
-        "Name can't be blank"
-      ]
-    )
-    expect(response).to have_http_status :unprocessable_entity
+    expect(response_json).to eq( "errors"=>"Validation failed: Name can't be blank" )
+    expect(response).to have_http_status :bad_request
   end
 end
