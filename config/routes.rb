@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'sessions#create'
+
   scope module: :api, defaults: { format: 'json' } do
     namespace :v1 do
       namespace :events do
@@ -7,5 +10,8 @@ Rails.application.routes.draw do
 
       resources :events, only: [:create, :show, :update]
     end
+
+    resources :users, only: [:create]
+    resources :sessions, only: [:create]
   end
 end

@@ -37,6 +37,10 @@ FactoryGirl.define do
   factory :user, aliases: [:owner] do
     sequence(:device_token) { SecureRandom.hex(3) }
     email { Faker::Internet.free_email }
-    password_digest { Faker::Internet.password(8)}
+    password_digest 'password'
+  
+    factory :admin do
+      admin true
+    end
   end
 end

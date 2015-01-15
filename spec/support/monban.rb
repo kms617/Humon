@@ -1,0 +1,1 @@
+Monban.test_mode!
