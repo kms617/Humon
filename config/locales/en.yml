@@ -17,3 +17,9 @@ en:
 
   titles:
     application: Humon
+
+en:
+  activerecord:
+    attributes:
+      user:
+        password_digest: "Password"
